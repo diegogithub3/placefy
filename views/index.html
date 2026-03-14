@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Placefy</title>
+  <link rel="stylesheet" href="../css/u.css"> 
+  <script src="//Google Maps Api Key" defer></script>
+</head>
+<body>
+  <div id="app">
+    <!-- Botones de autenticación -->
+    <div id="auth-buttons">
+      <a href="login.html" id="loginButton">Log In</a>
+      <a href="signup.html" id="signupButton">Sign Up</a>
+    </div>
+    
+    <!-- Logo y título -->
+    <img src="../assets/images/logo.png" alt="Logo" id="logo">
+    <h1>PLACEFY</h1>
+    <h2>Find the best places near you!</h2>
+    
+    <!-- Opciones de búsqueda -->
+    <div id="search-options">
+      <label>
+        <input type="radio" name="searchOption" value="distance">
+        Distance
+      </label>
+      <label>
+        <input type="radio" name="searchOption" value="rating" checked>
+        Rating
+      </label>
+    </div>
+
+    <!-- Configuración de distancia -->
+    <div id="distance-settings">
+      <label for="distance-input">Max Distance (km):</label>
+      <input type="number" id="distance-input" min="1" max="50" value="5">
+    </div>
+
+    <!-- Barra de búsqueda y botón -->
+    <input type="text" id="search" placeholder="Search for places...">
+    <button id="searchButton">Search</button>
+
+    <!-- Contenedor de resultados -->
+    <div id="results"></div>
+  </div> 
+  
+  <!-- Archivo JavaScript principal -->
+  <script src="../js/main.js" defer></script> 
+</body>
+</html>

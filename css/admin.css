@@ -1,0 +1,119 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    background-color: #f4f4f4;
+  }
+  
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    text-align: center;
+  }
+  
+  h1 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #333;
+  }
+  
+  h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #444;
+  }
+  
+  /* Estilo de la tabla de usuarios */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  table th, table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+  
+  table th {
+    background: #f8f8f8;
+    font-weight: bold;
+  }
+  
+  table td {
+    text-align: left;
+  }
+  
+  button, .button {
+    background-color: #5cb85c;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 5px;
+  }
+  
+  button:hover, .button:hover {
+    background-color: #4cae4c;
+  }
+  
+  form {
+    display: inline;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 16px;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Estilo del botón de logout y de retorno a inicio */
+  #logoutButton {
+    text-decoration: none;
+    color: #fff;
+    background-color: #007bff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 1px solid #007bff;
+    font-size: 16px;
+    display: inline-block;
+    margin-top: 20px;
+  }
+  
+  #logoutButton:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+  }
+  
+  /* Estilo del enlace "Back to Home" */
+  a.back-home {
+    display: inline-block;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #007bff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 1px solid #007bff;
+    font-size: 16px;
+    margin-top: 20px;
+  }
+  
+  a.back-home:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+  }
+  

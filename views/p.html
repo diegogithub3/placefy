@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Placefy</title>  
+  <link rel="stylesheet" href="../css/p.css"> 
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDBsOOFpFxC7Di0xEECZKjv4lEL1EModA&libraries=places" defer></script>
+  <script src="../js/publisher_main.js" defer></script>
+</head>
+<body>
+  <div id="app">
+    <img src="../assets/images/logo.png" alt="Logo" id="logo">
+    <h1>PLACEFY</h1>
+    
+    <!-- Mensaje de bienvenida -->
+    <h3 id="welcome-message">Welcome!</h3>
+
+    <!-- Formulario de publicación de lugares -->
+    <div id="publish-form">
+      <h2>Publish a Place</h2>
+      <form id="placeForm" action="../php/publish_place.php" method="post">
+        <label for="placeName">Name:</label>
+        <input type="text" id="placeName" name="placeName" required>
+        <br>
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" required>
+        <div id="addressSuggestions"></div>
+        <br>
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" maxlength="100" required></textarea>
+        <br>
+        <input type="hidden" id="latitude" name="latitude">
+        <input type="hidden" id="longitude" name="longitude">
+        <button type="submit">Publish</button>
+      </form>
+    </div>
+    
+    <!-- Lista de lugares publicados -->
+    <div id="publishedPlaces">
+      <h2>Your Published Places</h2>
+      <div id="placesList"></div>
+    </div>
+
+    <a href="../config/logout.php" id="logoutButton">Logout</a>
+  </div>
+
+  <script>
+    let autocomplete;
+
+    function initAutocomplete() {
+      const addressInput = document.getElementById('address');
+      autocomplete = new google.maps.places.Autocomplete(addressInput, {
+        types: ['address'],
+        componentRestrictions: { country: 'cl' } // Restricción a Chile
+      });
+      
+      autocomplete.addListener('place_changed', function() {
+        const place = autocomplete.getPlace();
+        if (place.geometry) {
+          document.getElementById('latitude').value = place.geometry.location.lat();
+          document.getElementById('longitude').value = place.geometry.location.lng();
+        }
+      });
+    }
+
+    function fetchPublishedPlaces() {
+      navigator.geolocation.getCurrentPosition(position => {
+        const currentLat = position.coords.latitude;
+        const currentLng = position.coords.longitude;
+
+        fetch(`../php/get_places.php?lat=${currentLat}&lng=${currentLng}`)
+          .then(response => response.json())
+          .then(data => {
+            const placesList = document.getElementById('placesList');
+            placesList.innerHTML = ''; // Limpiar lista existente
+            if (Array.isArray(data.places)) {
+              data.places.forEach(place => {
+                const placeElement = document.createElement('div');
+                placeElement.classList.add('place');
+                placeElement.innerHTML = `
+                  <h3>${place.name}</h3>
+                  <p>${place.address}</p>
+                  <p>Description: ${place.description}</p>
+                  <p>Distance: ${place.distance ? place.distance + ' km' : 'N/A'}</p>
+                  <button onclick="deletePlace(${place.id})">Delete</button>
+                `;
+                placesList.appendChild(placeElement);
+              });
+            } else {
+              console.error('Error fetching places:', data.error);
+            }
+          });
+      }, error => {
+        console.error('Error getting location:', error);
+      });
+    }
+
+    function deletePlace(placeId) {
+      fetch('../php/delete_place.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id: placeId }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert('Place deleted successfully.');
+          fetchPublishedPlaces(); // Actualizar la lista después de eliminar
+        } else {
+          alert('Error deleting place.');
+        }
+      })
+      .catch(error => console.error('Error deleting place:', error));
+    }
+
+    document.getElementById('placeForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const address = document.getElementById('address').value;
+      const description = document.getElementById('description').value;
+      const latitude = document.getElementById('latitude').value;
+      const longitude = document.getElementById('longitude').value;
+
+      if (!latitude || !longitude) {
+        alert('Address could not be geocoded.');
+        return;
+      }
+
+      fetch('../php/publish_place.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams(new FormData(this))
+      })
+      .then(response => response.text())
+      .then(text => {
+        alert(text);
+        if (text.includes('Lugar publicado correctamente')) {
+          this.reset(); // Borra los campos del formulario
+          fetchPublishedPlaces(); // Actualizar la lista de lugares publicados
+        }
+      })
+      .catch(error => console.error('Error publishing place:', error));
+    });
+
+    function getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    // Inicializar el autocompletado y cargar los lugares publicados
+    window.onload = function() {
+      initAutocomplete();
+      fetchPublishedPlaces();
+
+      // Obtener el nombre de usuario de la cookie
+      const username = getCookie('username');
+      if (username) {
+        document.getElementById('welcome-message').textContent = `Welcome ${username}!`;
+      }
+    };
+  </script>
+</body>
+</html>

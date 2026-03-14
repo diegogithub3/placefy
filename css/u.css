@@ -1,0 +1,198 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+
+#app {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #333;
+}
+
+h2 {
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: #666;
+}
+
+#search-options {
+    margin: 20px 0;
+}
+
+#search-options label {
+    margin-right: 20px;
+    font-size: 16px;
+}
+
+#search-options input[type="radio"] {
+    margin-right: 5px;
+}
+
+#distance-settings {
+    margin: 20px 0;
+}
+
+#distance-settings label {
+    font-size: 16px;
+}
+
+#distance-input {
+    width: 80px;
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+}
+
+#search {
+    width: calc(50% - 22px);
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    margin-top: 10px;
+}
+
+button {
+    background-color: #5cb85c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #4cae4c;
+}
+
+#results {
+    margin-top: 30px;
+    text-align: left;
+}
+
+#results h3 {
+    margin-top: 0;
+    font-size: 24px;
+    color: #444;
+}
+
+#db-results, #google-results {
+    margin-top: 20px;
+}
+
+.place {
+    background: #fafafa;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.place h4 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.place p {
+    margin: 5px 0;
+    color: #666;
+}
+
+#logo {
+    display: block;
+    margin: 0 auto 20px;
+    width: 150px;
+    height: auto;
+}
+
+a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 16px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+#logoutButton {
+    text-decoration: none;
+    color: #fff;
+    background-color: #007bff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 1px solid #007bff;
+    font-size: 16px;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+#logoutButton:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+#db-results .place p,
+#google-results .place p {
+    margin: 5px 0;
+    color: #000000; 
+}
+
+/* Estilos para los botones de autenticación */
+#auth-buttons {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+  }
+  
+  #auth-buttons a {
+    text-decoration: none;
+    color: #fff;
+    margin-left: 10px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #007bff; 
+    border: 1px solid #007bff; 
+    font-size: 16px; 
+  }
+  
+  #auth-buttons a:hover {
+    background-color: #0056b3; 
+    border-color: #0056b3; 
+  }
+  
+
+#back-to-home {
+    text-decoration: none;
+    color: #fff;
+    margin: 20px 10px 0; 
+    padding: 6px 12px; 
+    border-radius: 5px;
+    background-color: #007bff; 
+    border: 1px solid #007bff; 
+    font-size: 14px; 
+  }
+  
+  #back-to-home:hover {
+    background-color: #0056b3; 
+    border-color: #0056b3; 
+  }
+  
+  

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Placefy</title>
+  <link rel="stylesheet" href="../css/u.css"> 
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDBsOOFpFxC7Di0xEECZKjv4lEL1EModA&libraries=places" defer></script>
+</head>
+<body>
+  <div id="app">
+    
+    <!-- Logo y título -->
+    <img src="../assets/images/logo.png" alt="Logo" id="logo">
+    <h1>PLACEFY</h1>
+    <h2>Find the best places near you!</h2>
+    
+    <!-- Mensaje de bienvenida -->
+    <h3 id="welcome-message">Welcome!</h3>
+
+    <!-- Opciones de búsqueda -->
+    <div id="search-options">
+      <label>
+        <input type="radio" name="searchOption" value="distance">
+        Distance
+      </label>
+      <label>
+        <input type="radio" name="searchOption" value="rating" checked>
+        Rating
+      </label>
+    </div>
+
+    <!-- Configuración de distancia -->
+    <div id="distance-settings">
+      <label for="distance-input">Max Distance (km):</label>
+      <input type="number" id="distance-input" min="1" max="50" value="5">
+    </div>
+
+    <!-- Barra de búsqueda y botón -->
+    <input type="text" id="search" placeholder="Search for places...">
+    <button id="searchButton">Search</button>
+
+    <!-- Contenedor de resultados -->
+    <div id="results">
+      <div id="db-results"></div>
+      <div id="google-results"></div>
+    </div>
+
+    <a href="../config/logout.php" id="logoutButton">Logout</a>
+
+  </div>
+  
+  <!-- Archivo JavaScript principal -->
+  <script src="../js/user_main.js" defer></script> 
+  <script>
+    // Función para obtener el valor de una cookie por nombre
+    function getCookie(name) {
+      let value = `; ${document.cookie}`;
+      let parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    // Obtener el nombre de usuario de la cookie
+    const username = getCookie('username');
+    console.log('Username from cookie:', username); // Mensaje de depuración
+    if (username) {
+      // Actualizar el mensaje de bienvenida
+      document.getElementById('welcome-message').textContent = `Welcome ${username}!`;
+    }
+  </script>
+
+</body>
+</html>
